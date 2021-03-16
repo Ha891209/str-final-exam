@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Scarface Ronaldson",
-      "email": "sronaldson0@uol.com.br",
+      "email": "adasd@gmail.com",
       "address": "62825 Towne Lane",
       "active": false
     },
@@ -699,6 +699,13 @@
       "email": "mcosbee2r@go.com",
       "address": "0642 Spaight Junction",
       "active": false
+    },
+    {
+      "id": 101,
+      "name": "Kópis-Horváth Anikó",
+      "email": "ha891209@gmail.com",
+      "address": "Szilágyi Lajos utca utca 57/A",
+      "active": true
     }
   ]
 }
