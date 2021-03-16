@@ -24,7 +24,13 @@ export class UserListComponent implements OnInit {
   onClickDelete(id: number): void {
     this.userService.remove(id).subscribe(
       () => this.userService.getAll(),
+
     );
+    if (confirm('Are you sure you want to delete this user?')) {
+      console.log('The user was deleted to the database.');
+    } else {
+      console.log('The user was not deleted to the database.');
+    }
 
   }
 }
