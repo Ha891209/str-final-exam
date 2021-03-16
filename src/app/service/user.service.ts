@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { User } from '../model/user';
 export class UserService {
 
   endpoint: string = 'http://localhost:3000/users';
+
+  users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   constructor(
     private http: HttpClient
@@ -19,6 +21,11 @@ export class UserService {
    * @returns on observable with all users.
    */
   getAll(): Observable<User[]> {
+    this.users$.next([]);
+    this.http.get<User[]>(this.endpoint).subscribe(
+      usersList => this.users$.next(usersList),
+      error => console.error(error)
+    );
     return this.http.get<User[]>(`${this.endpoint}`);
   }
 
@@ -36,18 +43,26 @@ export class UserService {
    * The method is: this.http.delete
    */
 
-
+  remove(id: number): Observable<User> {
+    return this.http.delete<User>(`${this.endpoint}/${id}`);
+  }
 
   /**
    * Create a user in the database.
    * The method is: this.http.post
    */
-
+  create(user: User): Observable<User> {
+    return this.http.post<User>(this.endpoint, user);
+  }
 
 
   /**
    * Update a user in the database.
    * The method is: this.http.patch
    */
+
+  update(user: User): Observable<User> {
+    return this.http.patch<User>(`${this.endpoint}/${user.id}`, user);
+  }
 
 }
